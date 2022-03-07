@@ -16,9 +16,11 @@ import { GeocodingArrayResponse, GeocodingResponse, OnSelectPlaceProps } from ".
 
 const LocationButton = ({onSelectPlace}:OnSelectPlaceProps) => {
   const [suggestions, setSuggestions] = useState<GeocodingArrayResponse>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const { latitude, longitude,timestamp ,getPosition } = usePosition();
 
   const getDataFromGeocode = async () => {
+    setLoading(true)
     getGeocode({
       location: {
         lat: latitude,
@@ -27,8 +29,10 @@ const LocationButton = ({onSelectPlace}:OnSelectPlaceProps) => {
     })
       .then((results: GeocodingArrayResponse) => {
         setSuggestions(results);
+        setLoading(false)
       })
       .catch((error) => {
+        setLoading(false)
         console.log("😱 Error: ", error);
       });
   };
@@ -52,6 +56,8 @@ const LocationButton = ({onSelectPlace}:OnSelectPlaceProps) => {
           onClick={() => {
             getPosition();
           }}
+          isLoading={loading}
+          loadingText='Obteniendo'
         >
           Obtener de mi ubicacion <Icon ml="1" as={FaMapMarkerAlt} />
         </Button>

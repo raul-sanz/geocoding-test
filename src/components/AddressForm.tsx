@@ -12,10 +12,13 @@ import {
 } from "@chakra-ui/react";
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { addressInitialData } from "../helpers/data";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { AddressData, AddressDataProps } from "../types/interfaces";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const AddressForm = ({ data }: AddressDataProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [location, setLocation] = useLocalStorage<AddressData|string>("location",'');
   const [place, setPlace] = useState<AddressData>(data);
   useEffect(() => {
@@ -30,7 +33,13 @@ const AddressForm = ({ data }: AddressDataProps) => {
   };
 
   const saveLocation = () => {
-    setLocation(place)
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+      setLocation(place)
+      setPlace(addressInitialData)
+      Notify.success('Guardamos tu direccion con ¡Exito!');
+    }, 3000);
   };
 
   return (
@@ -152,6 +161,8 @@ const AddressForm = ({ data }: AddressDataProps) => {
       <Divider />
       <Flex direction="row-reverse" py="4" px={{ base: "4", md: "6" }}>
         <Button
+        isLoading={loading}
+        loadingText='Guardando tus datos'
           onClick={() => {
             saveLocation();
           }}

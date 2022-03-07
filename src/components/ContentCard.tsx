@@ -24,8 +24,6 @@ const ContentCard = () => {
     if (placeSelected) {
       let formated = AddresFormater(placeSelected)
       setPlaceFormated(formated)
-      console.log(placeSelected)
-      console.log(formated)
     }
   }, [placeSelected])
   
