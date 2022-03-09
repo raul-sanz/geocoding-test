@@ -1,0 +1,21 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Address {
+  id        Int      @id @default(autoincrement())
+  street    String
+  numExt    Int
+  numInt    String?
+  suburb    String
+  town      String
+  zip       String
+  city      String
+  state     String
+  country   String
+}

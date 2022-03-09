@@ -31,14 +31,14 @@ const Header = () => {
         direction={{ base: "row", md: "row" }}
         justify="space-between"
       >
-        <Box>
+        <Link href="/">
           <Image
             width="150px"
             objectFit="contain"
             src="/micompalogo.png"
             alt="Dan Abramov"
           />
-        </Box>
+        </Link>
         <Box display="flex" alignItems="center">
           <Box mr="5">
             <IconButton

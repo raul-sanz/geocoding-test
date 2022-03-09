@@ -25,20 +25,20 @@ export interface GeocodingResponse {
   };
 }
 
-interface PredictionSubstring{
-  length:number,
-  offset:number
+interface PredictionSubstring {
+  length: number;
+  offset: number;
 }
 
-interface PredictionTerm{
-  offset:number,
-  value:string
+interface PredictionTerm {
+  offset: number;
+  value: string;
 }
 
-interface StructuredFormatting{
-  main_text:  string
-main_text_matched_substrings:  Array<PredictionSubstring>
-secondary_text:string
+interface StructuredFormatting {
+  main_text: string;
+  main_text_matched_substrings: Array<PredictionSubstring>;
+  secondary_text: string;
 }
 
 export interface AutocompletePredictions {
@@ -51,34 +51,59 @@ export interface AutocompletePredictions {
   Type?: number;
 }
 
-export interface SuggestionsListProps{
-  data: AutocompletePredictionsArray
-  onSelect:(val:AutocompletePredictions)=>void
+export interface SuggestionsListProps {
+  data: AutocompletePredictionsArray;
+  onSelect: (val: AutocompletePredictions) => void;
 }
 
-export interface OnSelectPlaceProps{
-  onSelectPlace:(val:GeocodingResponse)=>void
+export interface OnSelectPlaceProps {
+  onSelectPlace: (val: GeocodingResponse) => void;
 }
 
 export interface AddressData {
-  street:string,
-  numExt:number|string,
-  numInt?:number|string,
-  suburb:string,
-  town:string,
-  zip:string,
-  city:string,
-  state:string,
-  country:string
+  street: string;
+  numExt: number | string;
+  numInt?: number | string | null;
+  suburb: string;
+  town: string;
+  zip: string;
+  city: string;
+  state: string;
+  country: string;
+}
+export interface AddressDataResponse {
+  id: number;
+  street: string;
+  numExt: number | string;
+  numInt?: number | string | null;
+  suburb: string;
+  town: string;
+  zip: string;
+  city: string;
+  state: string;
+  country: string;
 }
 
-export interface AddressDataProps{
-  data:AddressData
+export enum ActionType {Save='save',Update = 'update'}
+
+export interface AddressDataProps {
+  data: AddressData;
+  afterAction: () => void;
+  buttonText?:string
+  action:ActionType
+  idForUpdate?:string
+}
+
+export interface AddressDataResponseArrayProps {
+  addresses: AddressDataResponseArray
+}
+export interface AddressDataResponseProps {
+  address: AddressDataResponse
 }
 
 export interface GeocodingArrayResponse extends Array<GeocodingResponse> {}
 
+export interface AutocompletePredictionsArray
+  extends Array<AutocompletePredictions> {}
 
-export interface AutocompletePredictionsArray extends Array<AutocompletePredictions> {}
-
-
+export interface AddressDataResponseArray extends Array<AddressDataResponse> {}

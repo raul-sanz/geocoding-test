@@ -4,7 +4,7 @@ export const AddresFormater = (location: GeocodingResponse) => {
   let data:AddressData = {
     street:'',
     numExt:'',
-    numInt:'',
+    numInt:null,
     suburb:'',
     town:'',
     zip:'',

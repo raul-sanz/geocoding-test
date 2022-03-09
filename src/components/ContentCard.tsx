@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AddresFormater } from "../helpers/AddressFormater";
 import { useWindowSize } from "../hooks/useWindowSize";
-import { AddressData, GeocodingResponse } from "../types/interfaces";
+import { ActionType, AddressData, GeocodingResponse } from "../types/interfaces";
 import AddressForm from "./AddressForm";
 import LocationButton from "./LocationButton";
 import PlacesAutocomplete from "./PlacesAutocomplete";
@@ -44,7 +44,7 @@ const ContentCard = () => {
         <Box w="full">
           <PlacesAutocomplete onSelectPlace={setPlaceSelected}/>
         </Box>
-        {placeSelected && <AddressForm data={placeFormated}/>}
+        {placeSelected && <AddressForm action={ActionType.Save} buttonText="Guardar Direccion" afterAction={()=>{setPlaceSelected(null)}} data={placeFormated}/>}
       </Box>
       {width > 1024 && 
       <Box
