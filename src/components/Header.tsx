@@ -14,8 +14,10 @@ import { AddIcon, HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter()
   const { colorMode, toggleColorMode } = useColorMode();
   const [] = useState(false);
   return (
@@ -66,10 +68,10 @@ const Header = () => {
                 icon={<HamburgerIcon boxSize="8" />}
               />
               <MenuList>
-              <Link href="/address">
-                <MenuItem icon={<Icon as={FaMapMarkerAlt} />}>
+              
+                <MenuItem icon={<Icon as={FaMapMarkerAlt} />} onClick={()=>{router.push('/address')}}>
                  Mis Direcciones
-                </MenuItem></Link>
+                </MenuItem>
               </MenuList>
             </Menu>
           </Box>
